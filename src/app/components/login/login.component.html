@@ -1,0 +1,41 @@
+<mat-toolbar color="primary">
+  <mat-toolbar-row>
+    <span>Login and Regestration</span>
+    <span class="example-spacer"></span>
+    <div *ngIf="logout_icon">
+      <mat-icon class="example-icon">delete</mat-icon>
+    </div>
+  </mat-toolbar-row>
+</mat-toolbar>
+<mat-card class="loginform">
+  <mat-tab-group>
+    <mat-tab label="Login">
+      <mat-form-field>
+          <input matInput placeholder="Username"  [(ngModel)]="Username_login">
+      </mat-form-field>
+      <mat-form-field>
+          <input matInput placeholder="Enter your password" [type]="hide ? 'password' : 'text'"  [(ngModel)]="Password_login">
+          <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility' : 'visibility_off'}}</mat-icon>
+        </mat-form-field>
+        <br>
+        <button mat-raised-button color="primary" style="float: right;" (click)="login()">Login</button>
+    </mat-tab>
+    <mat-tab label="Sign Up">
+        <mat-form-field>
+            <input matInput placeholder="Username" [formControl]="username" [(ngModel)]="Username" required>
+            <mat-error *ngIf="username.invalid">{{getErrorMessageusername()}}</mat-error>
+        </mat-form-field>
+        <mat-form-field>
+            <input matInput placeholder="Enter your email" [formControl]="email" [(ngModel)]="Email" required>
+            <mat-error *ngIf="email.invalid">{{getErrorMessageemail()}}</mat-error>
+        </mat-form-field>
+        <mat-form-field>
+            <input matInput placeholder="Enter your password" [type]="hide ? 'password' : 'text'" [(ngModel)]="Password">
+            <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility' : 'visibility_off'}}</mat-icon>
+        </mat-form-field>
+        <br>
+        <button mat-raised-button color="primary" style="float: right;" (click)="signup()">Sign Up</button>
+    </mat-tab>
+  </mat-tab-group>
+</mat-card>
+
