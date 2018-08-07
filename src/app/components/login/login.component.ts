@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {FormControl, Validators} from '@angular/forms';
 import { flatten } from '../../../../node_modules/@angular/core/src/render3/util';
+import { LoginService } from '../../services/login.service';
 
 @Component({
   selector: 'app-login',
@@ -15,7 +16,7 @@ export class LoginComponent implements OnInit {
   public Password="";
   public Username_login=""
   public Password_login=""
-  constructor() { }
+  constructor(public _login: LoginService) { }
 
   ngOnInit() {
     if(this.Username!= "" || this.Email != "" || this.Password != ""){
@@ -38,6 +39,12 @@ export class LoginComponent implements OnInit {
 
   signup(){
     console.log(this.Username, this.Email, this.Password);
+    let json = JSON.stringify({
+      username:this.Username,
+      email:this.Email,
+      Password:this.Password,
+    })
+    this._login.signupservice(json)
   }
   
   login(){
