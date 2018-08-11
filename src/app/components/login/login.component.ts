@@ -11,15 +11,15 @@ import { LoginService } from '../../services/login.service';
 export class LoginComponent implements OnInit {
   public logout_icon:boolean=false;
   hide=true;
-  public Username:string="";
-  public Email:string="";
-  public Password="";
-  public Username_login=""
-  public Password_login=""
+  public usernameSignup:string="";
+  public emailSignup:string="";
+  public passwordSignup="";
+  public usernamelogin=""
+  public passwordlogin=""
   constructor(public _login: LoginService) { }
 
   ngOnInit() {
-    if(this.Username!= "" || this.Email != "" || this.Password != ""){
+    if(this.usernameSignup!= "" || this.emailSignup != "" || this.passwordSignup != ""){
     }
   }
 
@@ -38,16 +38,22 @@ export class LoginComponent implements OnInit {
   }
 
   signup(){
-    console.log(this.Username, this.Email, this.Password);
-    let json = JSON.stringify({
-      username:this.Username,
-      email:this.Email,
-      Password:this.Password,
-    })
-    this._login.signupservice(json)
+    console.log(this.usernameSignup, this.emailSignup, this.passwordSignup);
+    this._login.signupservice(this.usernameSignup, this.emailSignup, this.passwordSignup)
+    .then(() => {
+      this.login()
+    }).catch((err)=>{
+      if(err.status == 0){
+        console.log("cannot login")
+      }else{
+        console.log("error")
+      }
+    });
   }
   
   login(){
-    console.log(this.Password_login, this.Username_login);
+    console.log(this.usernamelogin, this.passwordlogin);
+    this._login.login(this.usernamelogin, this.passwordlogin);
   }
+
 }

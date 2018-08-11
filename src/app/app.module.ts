@@ -6,6 +6,7 @@ import { LoginComponent } from './components/login/login.component';
 import { MaterialModule } from'./modules/material.module';
 import { Http, HttpModule } from "@angular/http";
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import { HomeComponent } from './components/home/home.component';
 
 
 
@@ -13,6 +14,7 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
   declarations: [
     AppComponent,
     LoginComponent,
+    HomeComponent,
   ],
   imports: [
     BrowserModule,
