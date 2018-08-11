@@ -2,13 +2,14 @@ import { Injectable } from '@angular/core';
 import {Headers, Http} from '@angular/http'
 import {Router} from '@angular/router';
 import {observable} from 'rxjs';
+import {MatSnackBar, MatSnackBarConfig} from '@angular/material'
 
 @Injectable({
   providedIn: 'root'
 })
 export class LoginService {
 
-  constructor(public http: Http,private router:Router) { }
+  constructor(public http: Http,private router:Router, private snackBar: MatSnackBar) { }
 
   public header = new Headers({
     // 'Access-Control-Allow-Origin':'*',
@@ -26,7 +27,7 @@ export class LoginService {
       password:password
     })
     console.log(json);
-    return this.http.post("http://localhost:8000/api-tokenn-auth", json, {headers: this.header})
+    return this.http.post("http://localhost:8000/api-tokenn-auth/", json, {headers: this.header})
     .toPromise().
     then(response => {
       localStorage.setItem(
@@ -41,9 +42,11 @@ export class LoginService {
     }).catch((err)=>{
       console.log("error in auth", err)
       if(err.status == 0 ){
-        console.log("connection error")
+        this.snackBar.open('cannot sign right now, try again later', 'Close')
       }else{
-        console.log("wrong username")
+        let config = new MatSnackBarConfig();
+        config.duration = 2000
+        this.snackBar.open('wrong username/password', 'Close', config)
       }
     });
   }
@@ -60,6 +63,13 @@ export class LoginService {
     .then(response => console.log(response));
 
 
+  }
+
+
+  public logout(){
+    localStorage.clear();
+    localStorage.removeItem("loginData");
+    localStorage.removeItem("username");
   }
 }
 

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {FormControl, Validators} from '@angular/forms';
 import { flatten } from '../../../../node_modules/@angular/core/src/render3/util';
 import { LoginService } from '../../services/login.service';
+import {MatSnackBar} from '@angular/material'
 
 @Component({
   selector: 'app-login',
@@ -16,7 +17,7 @@ export class LoginComponent implements OnInit {
   public passwordSignup="";
   public usernamelogin=""
   public passwordlogin=""
-  constructor(public _login: LoginService) { }
+  constructor(public _login: LoginService, private sanackBar: MatSnackBar) { }
 
   ngOnInit() {
     if(this.usernameSignup!= "" || this.emailSignup != "" || this.passwordSignup != ""){
@@ -44,9 +45,9 @@ export class LoginComponent implements OnInit {
       this.login()
     }).catch((err)=>{
       if(err.status == 0){
-        console.log("cannot login")
+        this.sanackBar.open('cannot sign right now, try again later', 'Close')
       }else{
-        console.log("error")
+        this.sanackBar.open('User already registered', 'Close')
       }
     });
   }

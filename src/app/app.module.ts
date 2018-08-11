@@ -10,6 +10,7 @@ import { HomeComponent } from './components/home/home.component';
 import { LoginService } from './services/login.service';
 import { AuthGuardService } from './services/auth-guard.service';
 import { AppRoutingModule } from './modules/app-routing.module';
+import { RouterModule } from '../../node_modules/@angular/router';
 
 
 
