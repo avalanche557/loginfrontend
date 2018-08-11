@@ -7,6 +7,9 @@ import { MaterialModule } from'./modules/material.module';
 import { Http, HttpModule } from "@angular/http";
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { HomeComponent } from './components/home/home.component';
+import { LoginService } from './services/login.service';
+import { AuthGuardService } from './services/auth-guard.service';
+import { AppRoutingModule } from './modules/app-routing.module';
 
 
 
@@ -22,8 +25,9 @@ import { HomeComponent } from './components/home/home.component';
     MaterialModule,
     FormsModule,
     ReactiveFormsModule,
+    AppRoutingModule,
     ],
-  providers: [],
+  providers: [LoginService, AuthGuardService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

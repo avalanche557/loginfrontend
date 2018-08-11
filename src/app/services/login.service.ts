@@ -16,6 +16,10 @@ export class LoginService {
     'Content-type':'application/json'
   })
 
+  isLoggedIn(){
+    return !(localStorage["loginData"] == null)
+  }
+
   login(username, password){
     let json = JSON.stringify({
       username : username,
